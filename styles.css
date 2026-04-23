@@ -171,7 +171,7 @@ body {
   padding: 20px;
   width: 100%;
   box-sizing: border-box;
-  background-color: #ebebeb;
+  background-color: #f9f9f9;
 }
 
 .cml-row {
@@ -343,7 +343,7 @@ body {
 
 /* Stock Alert Card */
 .custom-stock-alert {
-  background-color: #ebebeb;
+  background-color: #f9f9f9;
   border: none;
   border-radius: 12px;
   padding: 20px;
@@ -454,7 +454,7 @@ body {
 
 /* Guarantee Card */
 .guarantee-card {
-  background: #ebebeb;
+  background: #f7f7f7;
   border-radius: 12px;
   padding: 20px;
   margin-bottom: 24px;
@@ -498,7 +498,7 @@ body {
 }
 
 .faq-item {
-  background: #ebebeb;
+  background: #f7f7f7;
   border-radius: 10px;
   margin-bottom: 10px;
   overflow: hidden;
@@ -721,11 +721,21 @@ body {
 
 .variant-select {
   flex: 1;
-  padding: 12px 14px;
+  padding: 12px 32px 12px 14px;
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 15px;
   background: white;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+
+.variant-label {
+  min-width: 24px;
 }
 
 /* Totals Summary */
@@ -742,6 +752,7 @@ body {
   font-size: 14px;
   color: #555;
   margin-bottom: 8px;
+  font-weight: 500;
 }
 
 .total-row:last-child {
@@ -754,6 +765,11 @@ body {
   color: #222;
   padding-top: 8px;
   border-top: 1px solid #e5e5e5;
+}
+
+.discount-value {
+  color: #e00;
+  font-weight: 500;
 }
 
 .free-shipping {

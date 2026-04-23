@@ -59,9 +59,12 @@ function selectOffer(offer) {
 
 function updateTotal() {
   let total = selectedOffer === 1 ? 109900 : 149464;
+  let discount = selectedOffer === 1 ? 40647 : 70336;
   let formattedTotal = formatPrice(total);
+  let formattedDiscount = '−' + formatPrice(discount);
   
   document.getElementById('subtotal').textContent = formattedTotal;
+  document.getElementById('discount').textContent = formattedDiscount;
   document.getElementById('total').textContent = formattedTotal;
   document.getElementById('btnTotal').textContent = formattedTotal;
 }
