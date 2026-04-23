@@ -15,20 +15,9 @@ body {
   color: #333;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  padding-bottom: 80px;
 }
 
-/* Padding area background color - matches footer */
-body::after {
-  content: '';
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 80px;
-  background-color: #fafafa;
-  z-index: -1;
-}
+
 
 /* Hidden class for sticky button */
 .hidden {
@@ -275,7 +264,7 @@ body::after {
   right: 0;
   z-index: 9998;
   padding: 8px 16px 12px;
-  background: transparent;
+  background: transparent !important;
 }
 
 .sticky-cta {
@@ -1002,13 +991,13 @@ body::after {
 
 .form-group.has-icon .field-icon {
   background-color: #f0f0f0;
-  border-radius: 6px;
-  min-width: 36px;
-  height: 36px;
+  border-right: 1px solid #ddd;
+  border-radius: 6px 0 0 6px;
+  min-width: 42px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 4px;
+  align-self: stretch;
   flex-shrink: 0;
 }
 
