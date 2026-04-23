@@ -17,11 +17,21 @@ function toggleFaq(element) {
 function openModal() {
   document.getElementById('orderModal').classList.add('active');
   document.body.style.overflow = 'hidden';
+  // Esconder botão sticky quando o modal abre
+  const stickyWrapper = document.getElementById('sticky-cta-wrapper');
+  if (stickyWrapper) {
+    stickyWrapper.classList.add('hidden');
+  }
 }
 
 function closeModal() {
   document.getElementById('orderModal').classList.remove('active');
   document.body.style.overflow = '';
+  // Mostrar botão sticky quando o modal fecha (se aplicável pelo IntersectionObserver)
+  const stickyWrapper = document.getElementById('sticky-cta-wrapper');
+  if (stickyWrapper) {
+    stickyWrapper.classList.remove('hidden');
+  }
 }
 
 function closeModalOnOverlay(event) {
