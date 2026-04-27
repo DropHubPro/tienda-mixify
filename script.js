@@ -17,11 +17,21 @@ function toggleFaq(element) {
 function openModal() {
   document.getElementById('orderModal').classList.add('active');
   document.body.style.overflow = 'hidden';
+  // Esconder botão sticky quando o modal abre
+  const stickyWrapper = document.getElementById('sticky-cta-wrapper');
+  if (stickyWrapper) {
+    stickyWrapper.classList.add('hidden');
+  }
 }
 
 function closeModal() {
   document.getElementById('orderModal').classList.remove('active');
   document.body.style.overflow = '';
+  // Mostrar botão sticky quando o modal fecha (se aplicável pelo IntersectionObserver)
+  const stickyWrapper = document.getElementById('sticky-cta-wrapper');
+  if (stickyWrapper) {
+    stickyWrapper.classList.remove('hidden');
+  }
 }
 
 function closeModalOnOverlay(event) {
@@ -49,9 +59,12 @@ function selectOffer(offer) {
 
 function updateTotal() {
   let total = selectedOffer === 1 ? 109900 : 149464;
+  let discount = selectedOffer === 1 ? 40647 : 70336;
   let formattedTotal = formatPrice(total);
+  let formattedDiscount = '−' + formatPrice(discount);
   
   document.getElementById('subtotal').textContent = formattedTotal;
+  document.getElementById('discount').textContent = formattedDiscount;
   document.getElementById('total').textContent = formattedTotal;
   document.getElementById('btnTotal').textContent = formattedTotal;
 }
@@ -100,14 +113,14 @@ async function submitOrder(event) {
     
     // Mostrar sucesso (mesmo se o webhook não estiver configurado)
     closeModal();
-    showSuccess();
+    showSuccess(formData);
     form.reset();
     
   } catch (error) {
     console.error('Erro ao enviar pedido:', error);
     // Mesmo com erro, mostra sucesso para demonstração
     closeModal();
-    showSuccess();
+    showSuccess(formData);
     form.reset();
   }
   
@@ -116,7 +129,63 @@ async function submitOrder(event) {
   updateTotal();
 }
 
-function showSuccess() {
+// Order number counter (starts at 1001)
+let orderCounter = parseInt(localStorage.getItem('orderCounter') || '1000');
+
+function generateOrderNumber() {
+  orderCounter++;
+  localStorage.setItem('orderCounter', orderCounter.toString());
+  return '#' + orderCounter;
+}
+
+function showSuccess(orderData) {
+  const orderNumber = generateOrderNumber();
+  
+  // Build products summary
+  let productsSummary = '';
+  if (orderData.oferta_selecionada === '1 unidad') {
+    productsSummary = `Jalador Mágico de Silicona - ${orderData.variante} (1 unidad)`;
+  } else {
+    const variants = orderData.variante.split(' + ');
+    productsSummary = `Jalador Mágico de Silicona - ${variants[0]} (1 unidad)<br>Jalador Mágico de Silicona - ${variants[1]} (1 unidad)`;
+  }
+  
+  // Build address line
+  let addressLine = orderData.direccion;
+  if (orderData.torre_apto) {
+    addressLine += ' ' + orderData.torre_apto;
+  }
+  
+  // Generate confirmation HTML
+  const confirmationHTML = `
+    <div style="text-align:center; padding: 24px 16px; max-width: 480px; margin: 0 auto;">
+      <p style="font-size:22px; font-weight:700; margin-bottom:16px;">
+        Pedido ${orderNumber} realizado con éxito ✅
+      </p>
+      <p><strong>Productos:</strong><br>${productsSummary}</p>
+      <br>
+      <p><strong>Dirección:</strong><br>${addressLine}, ${orderData.ciudad}, ${orderData.departamento}</p>
+      <br>
+      <p><strong>Total a pagar en la entrega:</strong><br>${orderData.total}</p>
+      <br>
+      <p>En breve nos comunicaremos por WhatsApp al <strong>${orderData.phone}</strong> para confirmar el envío de tu pedido.</p>
+      <br>
+      <p style="color:rgb(224,62,45); font-weight:700;">
+        Si algún dato está incorrecto, no te preocupes: cuando confirmemos el envío puedes actualizarnos la información correcta.
+      </p>
+    </div>
+  `;
+  
+  // Update success message content
+  const successMessageContent = document.querySelector('#successMessage .modal-content');
+  if (successMessageContent) {
+    // Keep the close button, replace the rest
+    const closeBtn = successMessageContent.querySelector('.modal-close');
+    successMessageContent.innerHTML = '';
+    if (closeBtn) successMessageContent.appendChild(closeBtn);
+    successMessageContent.insertAdjacentHTML('beforeend', confirmationHTML);
+  }
+  
   document.getElementById('successMessage').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
