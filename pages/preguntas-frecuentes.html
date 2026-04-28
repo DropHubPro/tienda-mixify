@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <title>Preguntas Frecuentes | Tienda Mixify</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles/global.css" />
+    <link rel="stylesheet" href="/styles/pages.css" />
+    <style>
+      /* FAQ Section */
+      .faq-section {
+        background: white;
+        padding: 16px;
+        margin-top: 20px;
+      }
+      .faq-title {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 16px;
+        color: #333;
+      }
+      .faq-item {
+        border-bottom: 1px solid #f0f0f0;
+        padding: 16px 0;
+      }
+      .faq-item:last-child {
+        border-bottom: none;
+      }
+      .faq-question {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 15px;
+        font-weight: 600;
+        color: #333;
+        cursor: pointer;
+      }
+      .faq-icon {
+        font-size: 20px;
+        color: #0fba31;
+        transition: transform 0.3s;
+      }
+      .faq-answer {
+        font-size: 14px;
+        color: #666;
+        line-height: 1.5;
+        margin-top: 12px;
+        display: none;
+      }
+      .faq-item.active .faq-answer {
+        display: block;
+      }
+      .faq-item.active .faq-icon {
+        transform: rotate(45deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="header-placeholder"></div>
+    <main class="page-content">
+      <h1>Preguntas Frecuentes</h1>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          ¿Tienen pago contra entrega?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          Sí, ofrecemos pago contra entrega en toda Colombia. Pagas solo cuando
+          recibes el producto en la puerta de tu casa.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          ¿Cuánto tarda el envío?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          El tiempo estimado de entrega es de 2 a 5 días hábiles, dependiendo de
+          tu ciudad.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          ¿El envío es gratis?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          ¡Sí! El envío es totalmente gratis a cualquier ciudad y municipio de
+          Colombia.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          ¿Tienen garantía?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          Sí, todos nuestros productos cuentan con garantía por defectos de
+          fábrica. Si tienes algún problema, contáctanos y te daremos solución.
+        </div>
+      </div>
+    </main>
+    <div id="footer-placeholder"></div>
+    <script src="/js/components.js"></script>
+    <script>
+      function toggleFaq(element) {
+        const parent = element.parentElement;
+        parent.classList.toggle("active");
+      }
+    </script>
+  </body>
+</html>
