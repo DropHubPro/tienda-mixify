@@ -1,0 +1,20 @@
+.policy-content {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+.policy-content h1 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 16px;
+}
+.policy-content p {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.policy-content {
+  background-color: #ffffff;
+}
